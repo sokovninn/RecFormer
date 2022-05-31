@@ -6,3 +6,7 @@ validation_classification_answer.csv
 validation_classification_question.csv
 validation_completion_answer.csv
 validation_completion_question.csv
+.ipynb_checkpoints
+glove.6B
+preprocessed
+__pycache__
