@@ -9,10 +9,8 @@ def train(model, criterion, optimizer, data_loader, validation_loader, epochs, c
     running_loss = 0.0
     for batch in tqdm.tqdm(data_loader):
       x = batch[0].to(device=device)
-      #print(x[0])
       y = batch[1].flatten().to(device=device)
       preds = model(x)
-      #print(preds.shape, y.shape)
       loss = criterion(preds, y)
       optimizer.zero_grad()
       loss.backward()
@@ -36,9 +34,9 @@ def train(model, criterion, optimizer, data_loader, validation_loader, epochs, c
       val_loss /= len(validation_loader)
         
     print('Epoch: {}, Training Loss: {}, Validation Loss: {}'.format(epoch, epoch_loss, val_loss))
-    #print(measure_accuracy(model, train_loader))
     accuracy = measure_accuracy(model, validation_loader)
     print(accuracy)
+
 
 def train_multitask(model, criterion, optimizer, data_loader, validation_loader_cuisine, validation_loader_ingredients, epochs, clipping_on=False, device='cuda', loss_weights=[1,1]):
   model.to(device=device)
@@ -49,12 +47,9 @@ def train_multitask(model, criterion, optimizer, data_loader, validation_loader_
     running_loss = 0.0
     for batch in  tqdm.tqdm(data_loader):
       x = batch[0].to(device=device)
-      #print(x[0])
-      #print(batch[1].shape)
       y_cuisine = batch[1][:,:,0].flatten().to(device=device)
       y_ingredients = batch[1][:,:,1].flatten().to(device=device)
       preds_cuisine, preds_ingredients = model(x)
-      #print(preds.shape, y.shape)
       loss = loss_weights[0] * criterion(preds_cuisine, y_cuisine) + loss_weights[1] * criterion(preds_ingredients, y_ingredients)
       optimizer.zero_grad()
       loss.backward()
@@ -86,7 +81,6 @@ def train_multitask(model, criterion, optimizer, data_loader, validation_loader_
       val_loss_ingredients /= len(validation_loader_ingredients)
         
     print('Epoch: {}, Training Loss: {}, Validation Loss Cuisine: {}, Validation Loss Ingredients: {}'.format(epoch, epoch_loss, val_loss_cuisine, val_loss_ingredients))
-    #print(measure_accuracy(model, train_loader))
     cls_acc = measure_accuracy(model, validation_loader_cuisine, multitask_switch="cuisine")
     cmp_acc = measure_accuracy(model, validation_loader_ingredients, multitask_switch="ingredients")
     print("Validation classification accuracy: {}".format(cls_acc))

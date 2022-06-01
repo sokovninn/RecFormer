@@ -36,9 +36,7 @@ class EmbDataset(TorchDataset):
               ing_emb.append(self.vocab[word])
           if not ing_emb:
             ing_emb = [self.unk_emb]
-          #print(ing_emb)
           ing_emb = np.mean(ing_emb, axis=0)
-          #print(ing_emb.shape)
           input_embeddings.append(torch.Tensor(ing_emb))
         if not input_embeddings:
             input_tensor = torch.Tensor([self.unk_emb])

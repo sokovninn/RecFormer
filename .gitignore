@@ -10,3 +10,4 @@ validation_completion_question.csv
 glove.6B
 preprocessed
 __pycache__
+LinearSVCModel_completion.sav
