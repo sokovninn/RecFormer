@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 import tqdm
+from recformer.utils import measure_accuracy
 
 def train(model, criterion, optimizer, data_loader, validation_loader, epochs, clipping_on=False, device='cuda'):
   model.to(device=device)
