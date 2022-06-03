@@ -20,7 +20,13 @@ def measure_accuracy(model, data_loader, multitask_switch=None):
   with torch.no_grad():
     for batch in data_loader:
         preds = predict_on_batch(model, batch, multitask_switch)
-        target = batch[1].to(device=device).flatten()
+        if (len(batch[1].shape) == 3): # multitask dataset
+            if multitask_switch == "cuisine":
+                target = batch[1][:,:,0].to(device=device).flatten()
+            elif multitask_switch == "ingredients":
+                target = batch[1][:,:,1].to(device=device).flatten()
+        else:
+            target = batch[1].to(device=device).flatten()
         correct_preds += torch.sum(torch.argmax(preds, axis=1) == target)
     accuracy = correct_preds / len(data_loader.dataset)
   return accuracy
