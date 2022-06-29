@@ -15,7 +15,7 @@ we employ model blending to achieve maximum performance. An
 ensemble of 2 models, LSVC and RecFormer, achieves **79.20%** and
 **14.74%** validation accuracy for classification and completion tasks.
 
-Further details are available in the [report](data\RecFormer_report.pdf) and [presentation](data\RecFormer_presentation.pdf).
+Further details are available in the [report](data/RecFormer_report.pdf) and [presentation](data/RecFormer_presentation.pdf).
 
 
 ## Model architecture:
@@ -28,6 +28,6 @@ You must have the `pytorch, tensorflow, numpy, pandas, sklearn, matplotlib, jupy
 
 ## Running
 - Train and evaluate RecFormer: [recipe_transformers.ipynb](recipe_transformers.ipynb)
-- Train and evaluate baselines: [`baselines\BaseLineModelExperiment_final.ipynb](baselines\BaseLineModelExperiment_final.ipynb)
+- Train and evaluate baselines: [baselines/BaseLineModelExperiment_final.ipynb](baselines/BaseLineModelExperiment_final.ipynb)
 
 
